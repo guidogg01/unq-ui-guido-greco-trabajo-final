@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Board from "../components/board";
 import cardsBandas from "../cardsData";
 
 const MemoTest = () => {
+  const navigate = useNavigate();
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
@@ -73,6 +75,7 @@ const MemoTest = () => {
 
   const handleRestart = () => {
     initializeGame();
+    navigate("/");
   };
 
   return (
