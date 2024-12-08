@@ -1,0 +1,11 @@
+@import './memoTest.css';
+@import './card.css';
+
+body {
+  font-family: 'Arial', sans-serif;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  height: 100vh;
+}
