@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Board from "../components/board";
 import cardsBandas from "../cardsData";
-
-// Importamos los archivos de estilos
-import "../styles/board.css";  // Estilos del tablero
-import "../styles/card.css";   // Estilos de las cartas
+import "../styles/board.css";
+import "../styles/card.css";
 
 const MemoTest = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
@@ -19,19 +18,23 @@ const MemoTest = () => {
   );
   const [gameOver, setGameOver] = useState(false);
 
+  const difficulty = location.state?.difficulty || "Ensayo";
+
   useEffect(() => {
     initializeGame();
-  }, []);
+  }, [difficulty]);
 
   const initializeGame = () => {
-    const shuffledCards = [...cardsBandas, ...cardsBandas]
+    const numPairs = difficulty === "Concierto" ? 18 : 8; // Define el número de pares
+    const selectedCards = cardsBandas.slice(0, numPairs); // Selecciona las imágenes necesarias
+    const shuffledCards = [...selectedCards, ...selectedCards] // Duplica las cartas
       .map((card, index) => ({
         ...card,
         id: `${card.image}-${index}`,
         flipped: false,
       }))
-      .sort(() => Math.random() - 0.5);
-
+      .sort(() => Math.random() - 0.5); // Baraja las cartas
+  
     setCards(shuffledCards);
     setFlippedCards([]);
     setMatchedCards([]);

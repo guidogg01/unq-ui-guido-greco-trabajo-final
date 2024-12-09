@@ -1,7 +1,9 @@
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .card {
@@ -37,6 +39,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url('/images/fondoDeCartas.png');
+  background-size: cover;
 }
 
 .card-back {

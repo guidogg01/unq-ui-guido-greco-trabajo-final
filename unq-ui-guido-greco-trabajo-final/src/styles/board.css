@@ -1,6 +1,6 @@
 .board-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 15px;
   justify-content: center;
   padding: 20px;

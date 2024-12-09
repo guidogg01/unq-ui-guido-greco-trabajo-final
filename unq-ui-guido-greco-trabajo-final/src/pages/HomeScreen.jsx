@@ -1,13 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/HomeScreen.css";  // Asegúrate de que el archivo CSS esté importado.
+import "../styles/HomeScreen.css";
 
 const HomeScreen = () => {
   const navigate = useNavigate();
-
-  const handleStartGame = () => {
-    navigate("/play");
-  };
 
   return (
     <div className="home-container">
@@ -15,11 +11,16 @@ const HomeScreen = () => {
         <h2>¡Pon a prueba tu memoria con Rock Nacional!</h2>
       </div>
       <h1>¡Bienvenido a MemoTest!</h1>
-      <p>
-        Pon a prueba tu memoria en este divertido juego.
-      </p>
+      <p>Pon a prueba tu memoria en este divertido juego.</p>
       <p>¡Encontrá las parejas de las bandas de rock nacional y acumula puntos!</p>
-      <button onClick={handleStartGame}>Comenzar Juego</button>
+      <div className="difficulty-buttons">
+        <button onClick={() => navigate("/play", { state: { difficulty: "Ensayo" } })}>
+          Modo Ensayo
+        </button>
+        <button onClick={() => navigate("/play", { state: { difficulty: "Concierto" } })}>
+          Modo Concierto
+        </button>
+      </div>
     </div>
   );
 };

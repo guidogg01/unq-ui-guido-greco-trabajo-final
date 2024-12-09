@@ -40,7 +40,7 @@ body, html {
   line-height: 1.5;
   color: #fff;
   filter: brightness(60%);
-  text-shadow: 3px 3px 8px rgba(255, 255, 255, 0.2);  /* Sombra similar al título */
+  text-shadow: 3px 3px 8px rgba(255, 255, 255, 0.2);
 }
 
 .home-container button {
@@ -53,6 +53,7 @@ body, html {
   cursor: pointer;
   font-family: 'Arial', sans-serif;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 25px;
 }
 
 .home-container button:hover {
