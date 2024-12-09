@@ -8,9 +8,14 @@ const Card = ({ id, image, isFlipped, isMatched, onClick }) => {
       }`}
       onClick={() => !isFlipped && !isMatched && onClick(id)}
     >
-      {isFlipped || isMatched ? (
-        <img src={image} alt="Card" className="card-image" />
-      ) : null}
+      <div className="card-inner">
+        <div className="card-front">
+          {isFlipped || isMatched ? (
+            <img className="card-image" src={image} alt="Card" />
+          ) : null}
+        </div>
+        <div className="card-back"></div>
+      </div>
     </div>
   );
 };

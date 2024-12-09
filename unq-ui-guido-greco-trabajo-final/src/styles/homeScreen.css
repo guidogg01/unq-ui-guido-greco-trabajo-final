@@ -1,0 +1,82 @@
+/* Asegurar que el fondo negro ocupe toda la página */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #121212;
+}
+
+#root {
+  height: 100%;
+}
+
+.home-container {
+  text-align: center;
+  background-color: #121212;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  position: relative;
+}
+
+.home-container h1 {
+  font-family: 'Rock Salt', cursive;
+  font-size: 4rem;
+  color: #ff4081;
+  text-shadow: 3px 3px 8px rgba(255, 255, 255, 0.2);
+  margin-bottom: 70px;
+}
+
+.home-container p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+  color: #f5f5f5;
+}
+
+.home-container button {
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: #ff4081;
+  color: white;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Arial', sans-serif;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.home-container button:hover {
+  background-color: #e40057;
+  transform: scale(1.1);
+}
+
+.home-container .banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: url('/path/to/rock-banner-image.jpg') no-repeat center center;
+  background-size: cover;
+  height: 250px;
+  width: 100%;
+  filter: brightness(60%);
+}
+
+.home-container .banner h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 2rem;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+}

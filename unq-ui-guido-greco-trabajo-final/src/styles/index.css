@@ -1,5 +1,7 @@
 @import './memoTest.css';
+@import './homeScreen.css';
 @import './card.css';
+@import './board.css';
 
 body {
   font-family: 'Arial', sans-serif;
