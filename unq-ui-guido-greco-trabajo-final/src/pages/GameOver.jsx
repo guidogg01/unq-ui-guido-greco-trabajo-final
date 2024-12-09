@@ -12,7 +12,8 @@ const GameOver = () => {
   return (
     <div className="game-over-container">
       <h1>¡Juego Terminado!</h1>
-      <p>Gracias por jugar. ¡Intenta nuevamente!</p>
+      <p>Gracias por jugar.</p>
+      <p>¡Intenta nuevamente!</p>
       <button onClick={handleRestart}>Volver al inicio</button>
     </div>
   );

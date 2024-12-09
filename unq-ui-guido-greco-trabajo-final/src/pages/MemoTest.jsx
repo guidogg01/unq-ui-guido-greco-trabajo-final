@@ -13,6 +13,7 @@ const MemoTest = () => {
   const [matchedCards, setMatchedCards] = useState([]);
   const [attempts, setAttempts] = useState(0);
   const [points, setPoints] = useState(0);
+  const [remainingTries, setRemainingTries] = useState(5); // Para Gira Mundial
   const [highScoreEnsayo, setHighScoreEnsayo] = useState(
     parseInt(localStorage.getItem("highScoreEnsayo")) || 0
   );
@@ -28,7 +29,7 @@ const MemoTest = () => {
   }, [difficulty]);
 
   const initializeGame = () => {
-    const numPairs = difficulty === "Concierto" ? 18 : 8; 
+    const numPairs = difficulty === "Concierto" ? 18 : difficulty === "Gira Mundial" ? 18 : 8; 
     const selectedCards = cardsBandas.slice(0, numPairs);
     const shuffledCards = [...selectedCards, ...selectedCards]
       .map((card, index) => ({
@@ -44,6 +45,9 @@ const MemoTest = () => {
     setAttempts(0);
     setPoints(0);
     setGameOver(false);
+    if (difficulty === "Gira Mundial") {
+      setRemainingTries(10); // Reiniciar intentos para Gira Mundial
+    }
   };
 
   const handleCardClick = (id) => {
@@ -66,6 +70,9 @@ const MemoTest = () => {
         } else {
           setTimeout(() => {
             setPoints((prev) => Math.max(0, prev - 2));
+            if (difficulty === "Gira Mundial") {
+              setRemainingTries((prev) => prev - 1); // Reducir intentos restantes
+            }
             setFlippedCards([]);
           }, 1260);
         }
@@ -85,8 +92,12 @@ const MemoTest = () => {
       alert(`¡GANASTE! Tu puntuación final fue: ${points}`);
       setGameOver(true);
       navigate("/game-over");
+    } else if (difficulty === "Gira Mundial" && remainingTries === 0) {
+      alert("¡Se agotaron los intentos! Game Over.");
+      setGameOver(true);
+      navigate("/game-over");
     }
-  }, [matchedCards, cards, points, highScoreEnsayo, highScoreConcierto, navigate, difficulty]);
+  }, [matchedCards, cards, points, highScoreEnsayo, highScoreConcierto, remainingTries, navigate, difficulty]);
 
   const handleRestart = () => {
     initializeGame();
@@ -99,7 +110,15 @@ const MemoTest = () => {
       <div className="memorization-info">
         <p>Intentos: {attempts}</p>
         <p>Puntos: {points}</p>
-        <p>Mejor puntuación: {difficulty === "Ensayo" ? highScoreEnsayo : highScoreConcierto}</p>
+        {difficulty === "Gira Mundial" && <p>Intentos restantes: {remainingTries}</p>}
+        <p>
+          Mejor puntuación:{" "}
+          {difficulty === "Ensayo"
+            ? highScoreEnsayo
+            : difficulty === "Concierto"
+            ? highScoreConcierto
+            : ""}
+        </p>
       </div>
       <Board
         cards={cards}

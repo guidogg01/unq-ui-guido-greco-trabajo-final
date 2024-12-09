@@ -20,6 +20,9 @@ const HomeScreen = () => {
         <button onClick={() => navigate("/play", { state: { difficulty: "Concierto" } })}>
           Modo Concierto
         </button>
+        <button onClick={() => navigate("/play", { state: { difficulty: "Gira Mundial" } })}>
+          Modo Gira Mundial
+        </button>
       </div>
     </div>
   );
