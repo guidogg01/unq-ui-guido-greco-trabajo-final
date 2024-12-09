@@ -8,7 +8,6 @@ const cardsBandas = [
     { id: "cuartetoDeNos",   image: '/images/cuartetoDeNos.png'           },
     { id: "cuartetoDeNos2",  image: '/images/cuartetoDeNos2.png'          },
     { id: "divididos",       image: '/images/divididos.png'               },
-    { id: "fondo",           image: '/images/fondoDeCartas.png'           },
     { id: "intoxicados",     image: '/images/intoxicados.png'             },
     { id: "intoxicados2",    image: '/images/intoxicados2.png'            },
     { id: "laVelaPuerca",    image: '/images/laVelaPuerca.png'            }, 
@@ -18,6 +17,7 @@ const cardsBandas = [
     { id: "noTeVaAGustar",   image: '/images/noTeVaAGustar.png'           },
     { id: "manchaDeRolando", image: '/images/manchaDeRolando.png'         },
     { id: "patricioRey",     image: '/images/patricioRey.png'             },
+    { id: "fondo",           image: '/images/fondoDeCartas.png'           },
   ];
   
 export default cardsBandas;  

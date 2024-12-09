@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./Card";
+import Card from "./card";
 
 const Board = ({ cards, flippedCards, matchedCards, onCardClick }) => {
   const numColumns = Math.sqrt(cards.length); // Calcula dinámicamente las columnas en base al número de cartas

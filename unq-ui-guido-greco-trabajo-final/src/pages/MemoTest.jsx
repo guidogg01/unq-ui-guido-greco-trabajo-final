@@ -13,8 +13,11 @@ const MemoTest = () => {
   const [matchedCards, setMatchedCards] = useState([]);
   const [attempts, setAttempts] = useState(0);
   const [points, setPoints] = useState(0);
-  const [highScore, setHighScore] = useState(
-    parseInt(localStorage.getItem("highScore")) || 0
+  const [highScoreEnsayo, setHighScoreEnsayo] = useState(
+    parseInt(localStorage.getItem("highScoreEnsayo")) || 0
+  );
+  const [highScoreConcierto, setHighScoreConcierto] = useState(
+    parseInt(localStorage.getItem("highScoreConcierto")) || 0
   );
   const [gameOver, setGameOver] = useState(false);
 
@@ -25,15 +28,15 @@ const MemoTest = () => {
   }, [difficulty]);
 
   const initializeGame = () => {
-    const numPairs = difficulty === "Concierto" ? 18 : 8; // Define el número de pares
-    const selectedCards = cardsBandas.slice(0, numPairs); // Selecciona las imágenes necesarias
-    const shuffledCards = [...selectedCards, ...selectedCards] // Duplica las cartas
+    const numPairs = difficulty === "Concierto" ? 18 : 8; 
+    const selectedCards = cardsBandas.slice(0, numPairs);
+    const shuffledCards = [...selectedCards, ...selectedCards]
       .map((card, index) => ({
         ...card,
         id: `${card.image}-${index}`,
         flipped: false,
       }))
-      .sort(() => Math.random() - 0.5); // Baraja las cartas
+      .sort(() => Math.random() - 0.5);
   
     setCards(shuffledCards);
     setFlippedCards([]);
@@ -72,14 +75,18 @@ const MemoTest = () => {
 
   useEffect(() => {
     if (matchedCards.length === cards.length && cards.length > 0) {
-      if (points > highScore) {
-        setHighScore(points);
-        localStorage.setItem("highScore", points);
+      if (difficulty === "Ensayo" && points > highScoreEnsayo) {
+        setHighScoreEnsayo(points);
+        localStorage.setItem("highScoreEnsayo", points);
+      } else if (difficulty === "Concierto" && points > highScoreConcierto) {
+        setHighScoreConcierto(points);
+        localStorage.setItem("highScoreConcierto", points);
       }
       alert(`¡GANASTE! Tu puntuación final fue: ${points}`);
       setGameOver(true);
+      navigate("/game-over");
     }
-  }, [matchedCards, cards, points, highScore]);
+  }, [matchedCards, cards, points, highScoreEnsayo, highScoreConcierto, navigate, difficulty]);
 
   const handleRestart = () => {
     initializeGame();
@@ -92,7 +99,7 @@ const MemoTest = () => {
       <div className="memorization-info">
         <p>Intentos: {attempts}</p>
         <p>Puntos: {points}</p>
-        <p>Mejor puntuación: {highScore}</p>
+        <p>Mejor puntuación: {difficulty === "Ensayo" ? highScoreEnsayo : highScoreConcierto}</p>
       </div>
       <Board
         cards={cards}
