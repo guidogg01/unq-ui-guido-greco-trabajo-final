@@ -61,7 +61,7 @@ const MemoTest = () => {
           setTimeout(() => {
             setPoints((prev) => Math.max(0, prev - 2));
             setFlippedCards([]);
-          }, 2000);
+          }, 1260);
         }
       }
     }
