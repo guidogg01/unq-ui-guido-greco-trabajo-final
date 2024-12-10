@@ -29,10 +29,6 @@
   transform: rotateY(360deg);
 }
 
-.card.default {
-  background-color: gray;
-}
-
 .card-front {
   width: 100%;
   height: 100%;

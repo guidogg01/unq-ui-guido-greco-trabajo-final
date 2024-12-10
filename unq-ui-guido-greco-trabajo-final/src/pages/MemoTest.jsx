@@ -13,12 +13,15 @@ const MemoTest = () => {
   const [matchedCards, setMatchedCards] = useState([]);
   const [attempts, setAttempts] = useState(0);
   const [points, setPoints] = useState(0);
-  const [remainingTries, setRemainingTries] = useState(5); // Para Gira Mundial
+  const [remainingTries, setRemainingTries] = useState(20);
   const [highScoreEnsayo, setHighScoreEnsayo] = useState(
     parseInt(localStorage.getItem("highScoreEnsayo")) || 0
   );
   const [highScoreConcierto, setHighScoreConcierto] = useState(
     parseInt(localStorage.getItem("highScoreConcierto")) || 0
+  );
+  const [highScoreGiraMundial, setHighScoreGiraMundial] = useState(
+    parseInt(localStorage.getItem("highScoreGiraMundial")) || 0
   );
   const [gameOver, setGameOver] = useState(false);
 
@@ -29,7 +32,12 @@ const MemoTest = () => {
   }, [difficulty]);
 
   const initializeGame = () => {
-    const numPairs = difficulty === "Concierto" ? 18 : difficulty === "Gira Mundial" ? 18 : 8; 
+    const numPairs =
+      difficulty === "Concierto"
+        ? 18
+        : difficulty === "Gira Mundial"
+        ? 18
+        : 8;
     const selectedCards = cardsBandas.slice(0, numPairs);
     const shuffledCards = [...selectedCards, ...selectedCards]
       .map((card, index) => ({
@@ -38,7 +46,7 @@ const MemoTest = () => {
         flipped: false,
       }))
       .sort(() => Math.random() - 0.5);
-  
+
     setCards(shuffledCards);
     setFlippedCards([]);
     setMatchedCards([]);
@@ -46,7 +54,7 @@ const MemoTest = () => {
     setPoints(0);
     setGameOver(false);
     if (difficulty === "Gira Mundial") {
-      setRemainingTries(10); // Reiniciar intentos para Gira Mundial
+      setRemainingTries(20);
     }
   };
 
@@ -71,7 +79,7 @@ const MemoTest = () => {
           setTimeout(() => {
             setPoints((prev) => Math.max(0, prev - 2));
             if (difficulty === "Gira Mundial") {
-              setRemainingTries((prev) => prev - 1); // Reducir intentos restantes
+              setRemainingTries((prev) => prev - 1);
             }
             setFlippedCards([]);
           }, 1260);
@@ -88,16 +96,27 @@ const MemoTest = () => {
       } else if (difficulty === "Concierto" && points > highScoreConcierto) {
         setHighScoreConcierto(points);
         localStorage.setItem("highScoreConcierto", points);
+      } else if (difficulty === "Gira Mundial" && points > highScoreGiraMundial) {
+        setHighScoreGiraMundial(points);
+        localStorage.setItem("highScoreGiraMundial", points);
       }
-      alert(`¡GANASTE! Tu puntuación final fue: ${points}`);
       setGameOver(true);
-      navigate("/game-over");
+      navigate("/game-over", { state: { points, difficulty } });
     } else if (difficulty === "Gira Mundial" && remainingTries === 0) {
-      alert("¡Se agotaron los intentos! Game Over.");
       setGameOver(true);
-      navigate("/game-over");
+      navigate("/game-over", { state: { points, difficulty } });
     }
-  }, [matchedCards, cards, points, highScoreEnsayo, highScoreConcierto, remainingTries, navigate, difficulty]);
+  }, [
+    matchedCards,
+    cards,
+    points,
+    highScoreEnsayo,
+    highScoreConcierto,
+    highScoreGiraMundial,
+    remainingTries,
+    navigate,
+    difficulty,
+  ]);
 
   const handleRestart = () => {
     initializeGame();
@@ -110,13 +129,17 @@ const MemoTest = () => {
       <div className="memorization-info">
         <p>Intentos: {attempts}</p>
         <p>Puntos: {points}</p>
-        {difficulty === "Gira Mundial" && <p>Intentos restantes: {remainingTries}</p>}
+        {difficulty === "Gira Mundial" && (
+          <p>Intentos restantes: {remainingTries}</p>
+        )}
         <p>
           Mejor puntuación:{" "}
           {difficulty === "Ensayo"
             ? highScoreEnsayo
             : difficulty === "Concierto"
             ? highScoreConcierto
+            : difficulty === "Gira Mundial"
+            ? highScoreGiraMundial
             : ""}
         </p>
       </div>

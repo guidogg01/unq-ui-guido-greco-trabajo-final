@@ -5,7 +5,7 @@ body, html {
   background: url('/images/fondoRock.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
-  font-family: 'Rock Salt', cursive; /* Usando Google Fonts */
+  font-family: 'Rock Salt', cursive;
   background-color: #121212;
 }
 
