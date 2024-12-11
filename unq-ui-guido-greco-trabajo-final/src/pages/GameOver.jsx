@@ -7,6 +7,7 @@ const GameOver = () => {
   const navigate = useNavigate();
   const points = location.state?.points || 0;
   const difficulty = location.state?.difficulty || "Ensayo";
+  const { player1, player2 } = location.state || {};
 
   const getFinalMessage = () => {
     if (difficulty === "Concierto" || difficulty === "Gira Mundial") {
@@ -28,21 +29,64 @@ const GameOver = () => {
     } else {
       return "Tu nombre ya está grabado en la historia del rock argentino. ¡Qué crack!";
     }
-    
+  };
+
+  const getHighScore = () => {
+    const highScoreDuelo = parseInt(localStorage.getItem("highScoreDuelo")) || 0;
+    return highScoreDuelo;
+  };
+
+  const saveHighScore = () => {
+    const winnerScore = Math.max(player1, player2);
+    const highScoreDuelo = getHighScore();
+    if (winnerScore > highScoreDuelo) {
+      localStorage.setItem("highScoreDuelo", winnerScore);
+    }
   };
 
   const handleRestart = () => {
     navigate("/");
   };
 
+  const finalMessage = getFinalMessage();
+  saveHighScore();
+
+  const getWinnerMessage = () => {
+    if (player1 === player2) {
+      return "¡Es un empate! Ambos jugadores demostraron ser unos cracks del rock.";
+    } else if (player1 > player2) {
+      return "¡Jugador 1 es el ganador! ¡Un verdadero ídolo del rock argentino!";
+    } else {
+      return "¡Jugador 2 es el ganador! ¡Te consagraste como una leyenda del rock!";
+    }
+  };
+
   return (
     <div className="game-over-container">
       <h1>Game Over</h1>
-      <p>¡Tu puntuación final fue: {points} puntos!</p>
-      <p>{getFinalMessage()}</p>
+      {difficulty === "Duelo de Bandas" 
+        ? (
+          <>
+            <p>Jugador 1: {player1} puntos</p>
+            <p>Jugador 2: {player2} puntos</p>
+            <p>{getWinnerMessage()}</p>
+          </>
+        )
+        : (difficulty === "Ensayo" || difficulty === "Concierto" || difficulty === "Gira Mundial"
+          ? (
+            <>
+              <p>¡Tu puntuación final fue: {points} puntos!</p>
+              <p>{finalMessage}</p>
+            </>
+          )
+          : ""
+        )
+      }
+      <p>Mejor puntuación histórica: {getHighScore()}</p>
       <button onClick={handleRestart}>Volver a empezar</button>
     </div>
   );
+  
 };
 
 export default GameOver;

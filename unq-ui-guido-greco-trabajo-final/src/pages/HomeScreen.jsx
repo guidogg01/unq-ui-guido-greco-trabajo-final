@@ -23,6 +23,9 @@ const HomeScreen = () => {
         <button onClick={() => navigate("/play", { state: { difficulty: "Gira Mundial" } })}>
           Modo Gira Mundial
         </button>
+        <button onClick={() => navigate("/play", { state: { difficulty: "Duelo de Bandas" } })}>
+          Modo Duelo de Bandas
+        </button>
       </div>
     </div>
   );
