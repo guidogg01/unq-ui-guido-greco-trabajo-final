@@ -7,7 +7,8 @@ const GameOver = () => {
   const navigate = useNavigate();
   const points = location.state?.points || 0;
   const difficulty = location.state?.difficulty || "Ensayo";
-  const { player1, player2 } = location.state || {};
+  const player1 = localStorage.getItem("jugador1");
+  const player2 = localStorage.getItem("jugador2");
 
   const getFinalMessage = () => {
     if (difficulty === "Concierto" || difficulty === "Gira Mundial") {
@@ -26,8 +27,6 @@ const GameOver = () => {
       return "Estás en la lista del festival, pero todavía falta para ser cabeza de cartel.";
     } else if (points <= 65) {
       return "¡Callejeros, Las Pastillas del Abuelo y La Vela Puerca estarían orgullosos de vos!";
-    } else {
-      return "Tu nombre ya está grabado en la historia del rock argentino. ¡Qué crack!";
     }
   };
 
@@ -75,8 +74,9 @@ const GameOver = () => {
       return "¡Jugador 2 es el ganador! ¡Te consagraste como una leyenda del rock!";
     }
   };
-
+  
   return (
+
     <div className="game-over-container">
       <h1>Game Over</h1>
       {difficulty === "Duelo de Bandas" 
