@@ -135,9 +135,7 @@ const MemoTest = () => {
         navigate("/game-over", { state: { player1, player2, difficulty } });
       }
       setGameOver(true);
-      if (difficulty === "Ensayo") {
-        navigate("/game-over", { state: { points, difficulty } });
-      }
+      navigate("/game-over", { state: { points, difficulty } });
     } else if (difficulty === "Gira Mundial" && remainingTries === 0) {
       setGameOver(true);
       navigate("/game-over", { state: { points, difficulty } });

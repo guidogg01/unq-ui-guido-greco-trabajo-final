@@ -31,14 +31,29 @@ const GameOver = () => {
     }
   };
 
-  const getHighScore = () => {
+  const getHighScoreEnsayo = () => {
+    const highScoreEnsayo = parseInt(localStorage.getItem("highScoreEnsayo")) || 0;
+    return highScoreEnsayo;
+  };
+
+  const getHighScoreConcierto = () => {
+    const highScoreConcierto = parseInt(localStorage.getItem("highScoreConcierto")) || 0;
+    return highScoreConcierto;
+  };
+
+  const getHighScoreGiraMundial = () => {
+    const highScoreGiraMundial = parseInt(localStorage.getItem("highScoreGiraMundial")) || 0;
+    return highScoreGiraMundial;
+  };
+
+  const getHighScoreDuelo = () => {
     const highScoreDuelo = parseInt(localStorage.getItem("highScoreDuelo")) || 0;
     return highScoreDuelo;
   };
 
   const saveHighScore = () => {
     const winnerScore = Math.max(player1, player2);
-    const highScoreDuelo = getHighScore();
+    const highScoreDuelo = getHighScoreDuelo();
     if (winnerScore > highScoreDuelo) {
       localStorage.setItem("highScoreDuelo", winnerScore);
     }
@@ -70,19 +85,35 @@ const GameOver = () => {
             <p>Jugador 1: {player1} puntos</p>
             <p>Jugador 2: {player2} puntos</p>
             <p>{getWinnerMessage()}</p>
+            <p>Mejor puntuación histórica: {getHighScoreDuelo()}</p>
           </>
         )
-        : (difficulty === "Ensayo" || difficulty === "Concierto" || difficulty === "Gira Mundial"
+        :difficulty === "Ensayo"
           ? (
             <>
               <p>¡Tu puntuación final fue: {points} puntos!</p>
               <p>{finalMessage}</p>
+              <p>Mejor puntuación histórica: {getHighScoreEnsayo()}</p>
             </>
           )
-          : ""
-        )
+          : difficulty === "Concierto"
+            ? ( <>
+              <p>¡Tu puntuación final fue: {points} puntos!</p>
+              <p>{finalMessage}</p>
+              <p>Mejor puntuación histórica: {getHighScoreConcierto()}</p>
+            </>
+          )
+          : difficulty === "Gira Mundial"
+            ? (
+            <>
+              <p>¡Tu puntuación final fue: {points} puntos!</p>
+              <p>{finalMessage}</p>
+              <p>Mejor puntuación histórica: {getHighScoreGiraMundial()}</p>
+            </>
+          ) : ""
+        
       }
-      <p>Mejor puntuación histórica: {getHighScore()}</p>
+      
       <button onClick={handleRestart}>Volver a empezar</button>
     </div>
   );
