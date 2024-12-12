@@ -14,4 +14,4 @@
 
 ### ¡Ya estás preparado para inducirte en este maravilloso juego! ###
 
-Prepara un amigo ya que incluye multijugador :smile:
+Traete un amigo ya que incluye multijugador :smile:
