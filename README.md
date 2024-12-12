@@ -12,6 +12,6 @@
 
 **Único requisito para jugar: NodeJs**
 
-### ¡Ya estás preparado para inducirte en este maravilloso juego! ###
+### ¡Ya estás listo para inducirte en este maravilloso juego y poner a prueba tu memoria! ###
 
 Traete un amigo ya que incluye multijugador :smile:
