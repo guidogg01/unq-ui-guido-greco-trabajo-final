@@ -125,23 +125,15 @@ const MemoTest = () => {
         setHighScoreGiraMundial(points);
         localStorage.setItem("highScoreGiraMundial", points);
       } else if (difficulty === "Duelo de Bandas") {
-        const { player1, player2 } = playerPoints;
         const winnerScore = Math.max(playerPoints.player1, playerPoints.player2);
         if (winnerScore > highScoreDuelo) {
           setHighScoreDuelo(winnerScore);
           localStorage.setItem("highScoreDuelo", winnerScore);
-          localStorage.setItem("jugador1", playerPoints.player1);
-          localStorage.setItem("jugador2", playerPoints.player2);
+          
         }
         setGameOver(true);
-        navigate("/game-over", { 
-          state: { 
-            points, 
-            difficulty, 
-            player1: playerPoints.player1 || 0, 
-            player2: playerPoints.player2 || 0 
-          } 
-        });
+        localStorage.setItem("jugador1", playerPoints.player1);
+        localStorage.setItem("jugador2", playerPoints.player2);
       }
       setGameOver(true);
       navigate("/game-over", { state: { points, difficulty } });

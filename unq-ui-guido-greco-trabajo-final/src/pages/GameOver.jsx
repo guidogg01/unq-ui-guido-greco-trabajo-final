@@ -9,7 +9,7 @@ const GameOver = () => {
   const difficulty = location.state?.difficulty || "Ensayo";
   const player1 = localStorage.getItem("jugador1");
   const player2 = localStorage.getItem("jugador2");
-
+  
   const getFinalMessage = () => {
     if (difficulty === "Concierto" || difficulty === "Gira Mundial") {
       if (points <= 60) {
